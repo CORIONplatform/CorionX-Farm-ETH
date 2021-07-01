@@ -1,0 +1,22 @@
+# Firebase
+.firebase
+.firebaserc
+firebase.json
+
+# Yarn / Npm
+yarn.lock
+package-lock.json
+node_modules
+
+# Nuxt
+.nuxt
+dist
+
+# IDE / Editor
+.idea
+.vscode
+.editorconfig
+.prettierrc
+
+# macOS
+.DS_Store
