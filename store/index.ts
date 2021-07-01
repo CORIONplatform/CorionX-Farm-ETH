@@ -42,9 +42,9 @@ export type ContractInfoType = {
 export type LoadingKeyType = 'provider' | 'infoBundle'
 
 const infuraKey = '958c04784f1942ef95aa36a1a469fdc7'
-const address_TKNE = '0x26a604DFFE3ddaB3BEE816097F81d3C4a2A4CF97'
-const address_LPFARM = '0x63B72a679a7B9fc1C0252eb904336Ed0e6295E8A'
-const _providerE = new providers.InfuraProvider(1, infuraKey)
+const address_TKNE = '0x297c05f0de271380898c539899d6d93185f84a1b'
+const address_LPFARM = '0x51E42aDA0CC58493bE76DF7bc529dDAD951422FC'
+const _providerE = new providers.InfuraProvider(4, infuraKey)
 const LPFARM = new Contract(address_LPFARM, LPFarmAbi, _providerE)
 const TKNE = new Contract(address_TKNE, Token.abi, _providerE)
 
@@ -171,7 +171,7 @@ export const getters = getterTree(state, {
   },
   err_chainId(state): boolean | null {
     if (!state.chainId) return null
-    return state.chainId !== 1
+    return state.chainId !== 4
   },
   errorMessage(state, getters): string {
     return getters.err_chainId
