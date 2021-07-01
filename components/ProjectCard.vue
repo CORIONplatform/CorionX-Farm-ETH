@@ -203,6 +203,9 @@ export default Vue.extend({
     hasBalance(): boolean {
       return this.program.bal.gt(0)
     },
+    hasStaked(): boolean {
+      return this.program.amount.gt(0)
+    },
     approvedEnough(): boolean {
       return this.program.all.gt('0xfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
     },
@@ -236,17 +239,17 @@ export default Vue.extend({
     amountsEnough(): { [key in OpTypeInput]: boolean | null } {
       const { stake, increase, decrease } = this.amountsBN
       return {
-        stake: !stake ? null : !stake.gte(0),
-        increase: !increase ? null : !increase.gte(0),
-        decrease: !decrease ? null : !decrease.gte(0),
+        stake: !stake ? null : stake.gte(0),
+        increase: !increase ? null : increase.gte(0),
+        decrease: !decrease ? null : decrease.gte(0),
       }
     },
     balancesEnough(): { [key in OpTypeInput]: boolean | null } {
       const { stake, increase, decrease } = this.amountsBN
       return {
-        stake: !stake ? null : !stake.lte(this.program.bal),
-        increase: !increase ? null : !increase.lte(this.program.bal),
-        decrease: !decrease ? null : !decrease.lte(this.program.amount),
+        stake: !stake ? null : stake.lte(this.program.bal),
+        increase: !increase ? null : increase.lte(this.program.bal),
+        decrease: !decrease ? null : decrease.lte(this.program.amount),
       }
     },
     // BUTTONS DISABLED
@@ -270,7 +273,7 @@ export default Vue.extend({
         harvest: !this.$accessor.allSafe || this.yield.eq(0),
         increase: !this.$accessor.allSafe,
         decrease: !this.$accessor.allSafe,
-        unstake: !this.$accessor.allSafe,
+        unstake: !this.$accessor.allSafe || !this.hasStaked,
       }
     },
     disabledInner(): { [key in OpTypeInput]: boolean } {
