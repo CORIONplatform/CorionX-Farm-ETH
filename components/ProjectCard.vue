@@ -155,9 +155,9 @@ import { BigNumber } from '@ethersproject/bignumber'
 import { providers } from 'ethers'
 import Vue, { PropType } from 'vue'
 import { IBT } from '~/store'
-const programNames = ['CORX-ETH LP', 'CORX Staking']
-const programTokens = ['CORX-ETH LP', 'CORX']
-const programDecimals = [18, 8]
+const programNames = ['CORX-ETH LP', 'CORX Staking', 'CORX-ETH LP', 'CORX Staking']
+const programTokens = ['CORX-ETH LP', 'CORX', 'CORX-ETH LP', 'CORX']
+const programDecimals = [18, 8, 18, 8]
 const __k = 3171
 type OpTypeInput = 'stake' | 'increase' | 'decrease'
 type OpType = 'approve' | 'stake' | 'harvest' | 'increase' | 'decrease' | 'unstake'
