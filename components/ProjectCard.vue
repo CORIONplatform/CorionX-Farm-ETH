@@ -155,9 +155,18 @@ import { BigNumber } from '@ethersproject/bignumber'
 import { providers } from 'ethers'
 import Vue, { PropType } from 'vue'
 import { IBT } from '~/store'
-const programNames = ['CORX-ETH LP', 'CORX Staking', 'CORX-ETH LP', 'CORX Staking']
-const programTokens = ['CORX-ETH LP', 'CORX', 'CORX-ETH LP', 'CORX']
-const programDecimals = [18, 8, 18, 8]
+const programNames = {
+  '0x1Eb0ad0Abf4b6535fBe43Fb586399D837849eC6E': 'CORX-ETH LP',
+  '0x26a604DFFE3ddaB3BEE816097F81d3C4a2A4CF97': 'CORX Staking',
+} as { [key: string]: string }
+const programTokens = {
+  '0x1Eb0ad0Abf4b6535fBe43Fb586399D837849eC6E': 'CORX-ETH LP',
+  '0x26a604DFFE3ddaB3BEE816097F81d3C4a2A4CF97': 'CORX',
+} as { [key: string]: string }
+const programDecimals = {
+  '0x1Eb0ad0Abf4b6535fBe43Fb586399D837849eC6E': 18,
+  '0x26a604DFFE3ddaB3BEE816097F81d3C4a2A4CF97': 8,
+} as { [key: string]: number }
 const __k = 3171
 type OpTypeInput = 'stake' | 'increase' | 'decrease'
 type OpType = 'approve' | 'stake' | 'harvest' | 'increase' | 'decrease' | 'unstake'
@@ -189,13 +198,13 @@ export default Vue.extend({
   },
   computed: {
     dec(): number {
-      return programDecimals[this.program.i]
+      return programDecimals[this.program.LPTKN]
     },
     token(): string {
-      return programTokens[this.program.i]
+      return programTokens[this.program.LPTKN]
     },
     name(): string {
-      return programNames[this.program.i]
+      return programNames[this.program.LPTKN]
     },
     programFinished(): boolean {
       return this.program.finish <= this.$accessor.time
