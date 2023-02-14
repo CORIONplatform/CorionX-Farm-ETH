@@ -62,6 +62,7 @@ export default Vue.extend({
   components: { NavDrawer, NiceAppbar, ProjectCard },
   data() {
     return {
+      max_apr_percent: 170,
       toggle_active: true,
       toggle_staked: false,
       warningMessage: null as string | null,
@@ -74,7 +75,7 @@ export default Vue.extend({
       if (!(this.$accessor.infoBundle && this.$accessor.time)) return null
       return this.$accessor.infoBundle
         .map((p, i) => ({ ...p, i }))
-        .filter((p) => (this.toggle_active ? p.finish > this.$accessor.time : p.finish <= this.$accessor.time) && (!this.toggle_staked || p.started))
+        .filter((p) => (this.toggle_active ? p.finish > this.$accessor.time : p.finish <= this.$accessor.time) && (!this.toggle_staked || p.started) && p.M.mul(10).toNumber() <= this.max_apr_percent)
     },
   },
   async mounted() {
